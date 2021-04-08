@@ -1,5 +1,6 @@
 import flatten from 'flat';
 import merge from 'deepmerge';
+import JsonToTS from 'json-to-ts';
 
 export class Locale {
   public delimiter = '.';
@@ -42,22 +43,12 @@ export class Locale {
     return this._translations;
   }
 
-  public getEnum(
-    transformKey: (path: string[]) => string = path => path.join('_'),
-  ): string {
+  public getTypes(): string {
     let result = '';
 
-    result += `export enum Translations {\n`;
+    const types = JsonToTS(this._translations).map(t => `export ${t}\n\n`);
 
-    const pathList = getObjectPathList(this._translations);
-
-    pathList.forEach(path => {
-      result += `\t${transformKey(path.slice())} = '${path.join(
-        this.delimiter,
-      )}',\n`;
-    });
-
-    result += `}\n`;
+    result += types.join('');
 
     return result;
   }
@@ -65,25 +56,4 @@ export class Locale {
   public getTranslationsCount(): number {
     return Object.keys(this.getTranslations(true)).length;
   }
-}
-
-function getObjectPathList(target: Record<string, unknown>): string[][] {
-  const result: string[][] = [];
-
-  function step(temp: Record<string, unknown>, path?: string[]) {
-    Object.keys(temp).forEach(key => {
-      const value = temp[key];
-      const newPath = path ? path.concat([key]) : [key];
-
-      if (typeof value === 'object') {
-        return step(value as Record<string, unknown>, newPath);
-      }
-
-      result.push(newPath);
-    });
-  }
-
-  step(target);
-
-  return result;
 }
