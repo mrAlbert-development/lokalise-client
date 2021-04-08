@@ -4,8 +4,6 @@ const { LokaliseClient } = require('../dist/client.js');
 var pjson = require('../package.json');
 const config = require('config');
 const program = require('commander');
-const fs = require('fs');
-const path = require('path');
 
 program.version(pjson.version);
 

@@ -80,11 +80,7 @@ export class LokaliseClient {
     });
 
     if (declaration) {
-      saveFile(
-        declaration.dist,
-        'translations.ts',
-        this.locales[0].getEnum(declaration.transformKey),
-      );
+      saveFile(declaration.dist, 'types.ts', this.locales[0].getTypes());
       logMessage(`Declaration file was saved`, 'success');
     }
   }
@@ -97,12 +93,12 @@ export class LokaliseClient {
       project_id: string;
     } = await this.api.files.download(id, {
       bundle_structure: '%LANG_ISO%',
-      export_empty_as: 'base',
+      export_empty_as: 'empty',
       format: 'json',
       indentation: '2sp',
       original_filenames: false,
-      placeholder_format: 'icu',
-      plural_format: 'icu',
+      placeholder_format: 'i18n',
+      plural_format: 'i18next',
       replace_breaks: false,
       ...shared,
     });
