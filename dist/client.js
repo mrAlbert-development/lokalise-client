@@ -44,11 +44,11 @@ var LokaliseClient = /** @class */ (function () {
                             utils_1.removeDirectory(dist);
                         }
                         this.locales.forEach(function (locale) {
-                            utils_1.saveJsonToFile(dist, "" + (prefix || '') + locale.language + ".json", locale.getTranslations(useFlat));
+                            utils_1.saveJsonToFile(dist + "/" + locale.language, (prefix || '') + "index.json", locale.getTranslations(useFlat));
                             utils_1.logMessage("Translations were saved " + locale.language + ". Translations count: " + locale.getTranslationsCount(), 'success');
                         });
                         if (declaration) {
-                            utils_1.saveFile(declaration.dist, 'types.ts', this.locales[0].getTypes());
+                            utils_1.saveFile(declaration.dist + "/types", 'index.ts', this.locales[0].getTypes());
                             utils_1.logMessage("Declaration file was saved", 'success');
                         }
                         return [2 /*return*/];

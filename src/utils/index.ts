@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import shell from 'shelljs';
 
 export function saveJsonToFile(dir: string, fileName: string, json: object) {
   saveFile(dir, fileName, JSON.stringify(json, undefined, 2));
@@ -7,7 +8,7 @@ export function saveJsonToFile(dir: string, fileName: string, json: object) {
 
 export function saveFile(dir: string, fileName: string, content: string) {
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    shell.mkdir('-p', dir);
   }
 
   fs.writeFileSync(path.resolve(process.cwd(), dir, fileName), content);

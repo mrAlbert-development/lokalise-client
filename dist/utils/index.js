@@ -4,13 +4,14 @@ exports.logMessage = exports.removeDirectory = exports.saveFile = exports.saveJs
 var tslib_1 = require("tslib");
 var fs_1 = tslib_1.__importDefault(require("fs"));
 var path_1 = tslib_1.__importDefault(require("path"));
+var shelljs_1 = tslib_1.__importDefault(require("shelljs"));
 function saveJsonToFile(dir, fileName, json) {
     saveFile(dir, fileName, JSON.stringify(json, undefined, 2));
 }
 exports.saveJsonToFile = saveJsonToFile;
 function saveFile(dir, fileName, content) {
     if (!fs_1.default.existsSync(dir)) {
-        fs_1.default.mkdirSync(dir);
+        shelljs_1.default.mkdir('-p', dir);
     }
     fs_1.default.writeFileSync(path_1.default.resolve(process.cwd(), dir, fileName), content);
 }

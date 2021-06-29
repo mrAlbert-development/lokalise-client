@@ -67,8 +67,8 @@ export class LokaliseClient {
 
     this.locales.forEach(locale => {
       saveJsonToFile(
-        dist,
-        `${prefix || ''}${locale.language}.json`,
+        `${dist}/${locale.language}`,
+        `${prefix || ''}index.json`,
         locale.getTranslations(useFlat),
       );
       logMessage(
@@ -80,7 +80,11 @@ export class LokaliseClient {
     });
 
     if (declaration) {
-      saveFile(declaration.dist, 'types.ts', this.locales[0].getTypes());
+      saveFile(
+        `${declaration.dist}/types`,
+        'index.ts',
+        this.locales[0].getTypes(),
+      );
       logMessage(`Declaration file was saved`, 'success');
     }
   }
