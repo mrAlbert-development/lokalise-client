@@ -5,6 +5,9 @@ var tslib_1 = require("tslib");
 var node_api_1 = require("@lokalise/node-api");
 var files_1 = require("./api/files");
 var utils_1 = require("./utils");
+/* tslint:disable:no-var-requires */
+// datocms api uses require and does not support imports
+var SiteClient = require('datocms-client').SiteClient;
 var LokaliseClient = /** @class */ (function () {
     function LokaliseClient(config) {
         this.locales = [];
