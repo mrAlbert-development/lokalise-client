@@ -8,7 +8,8 @@
     "build": "rm -rf dist && tsc --declaration",
     "lint": "node_modules/tslint/bin/tslint \"src/**/*.ts\" \"src/**/*.tsx\" --project ./tsconfig.json",
     "preversion": "npm run lint && npm run build",
-    "translations": "node bin/index.js fetch"
+    "translations": "node bin/index.js fetch",
+    "dato": "node bin/index.js push-dato"
   },
   "engines": {
     "node": ">=10"
@@ -25,8 +26,8 @@
     "lokalise.co"
   ],
   "author": {
-    "name": "Maksim Sharipov",
-    "url": "https://github.com/pret-a-porter"
+    "name": "eEducation Albert AB",
+    "url": "https://hejalbert.se"
   },
   "license": "ISC",
   "bugs": {
@@ -46,6 +47,7 @@
     "@lokalise/node-api": "^5.0.0",
     "commander": "^6.1.0",
     "config": "^3.3.1",
+    "datocms-client": "^3.5.14",
     "decompress": "^4.2.1",
     "deepmerge": "^4.2.2",
     "flat": "^5.0.0",

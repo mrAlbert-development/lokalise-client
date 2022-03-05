@@ -8,6 +8,7 @@ var json_to_ts_1 = tslib_1.__importDefault(require("json-to-ts"));
 var Locale = /** @class */ (function () {
     function Locale(language, translations) {
         this.delimiter = '.';
+        this.lokaliseDelimiter = '::';
         this.language = language;
         this._translations = translations;
     }
@@ -19,6 +20,12 @@ var Locale = /** @class */ (function () {
             });
         }
         return this._translations;
+    };
+    Locale.prototype.getTranslation = function (lokaliseKey) {
+        var flattenedTranslations = flat_1.default(this._translations, {
+            delimiter: this.lokaliseDelimiter,
+        });
+        return flattenedTranslations[lokaliseKey];
     };
     Locale.prototype.addPrefixToKeys = function (prefix) {
         var _this = this;
@@ -42,6 +49,25 @@ var Locale = /** @class */ (function () {
     Locale.prototype.getTranslationsCount = function () {
         return Object.keys(this.getTranslations(true)).length;
     };
+    Object.defineProperty(Locale.prototype, "datoCmsISOLocale", {
+        get: function () {
+            var dictionary = {
+                se: 'sv-SE',
+                no: 'nn-NO',
+                dk: 'da-DK',
+                de: 'de-DE',
+                pl: 'pl-PL',
+                uk: 'en-GB',
+                fr: 'fr-FR',
+                es: 'es-ES',
+                it: 'it-IT',
+                pt: 'pt-PT'
+            };
+            return dictionary[this.language];
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Locale;
 }());
 exports.Locale = Locale;

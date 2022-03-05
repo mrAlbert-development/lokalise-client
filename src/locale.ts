@@ -4,6 +4,7 @@ import JsonToTS from 'json-to-ts';
 
 export class Locale {
   public delimiter = '.';
+  public lokaliseDelimiter = '::';
   public readonly language: string;
 
   private _translations: Record<string, unknown>;
@@ -21,6 +22,14 @@ export class Locale {
     }
 
     return this._translations;
+  }
+
+  public getTranslation(lokaliseKey: string): string | undefined {
+    const flattenedTranslations = flatten(this._translations, {
+      delimiter: this.lokaliseDelimiter,
+    }) as Record<string, string>;
+    
+    return flattenedTranslations[lokaliseKey] as string | undefined;
   }
 
   public addPrefixToKeys(prefix: string): Locale['_translations'] {
@@ -55,5 +64,23 @@ export class Locale {
 
   public getTranslationsCount(): number {
     return Object.keys(this.getTranslations(true)).length;
+  }
+
+  public get datoCmsISOLocale(): string {
+
+    const dictionary: Record<string, string> = {
+      se: 'sv-SE',
+      no: 'nn-NO',
+      dk: 'da-DK',
+      de: 'de-DE',
+      pl: 'pl-PL',
+      uk: 'en-GB',
+      fr: 'fr-FR',
+      es: 'es-ES',
+      it: 'it-IT',
+      pt: 'pt-PT'
+    };
+
+    return dictionary[this.language];
   }
 }
