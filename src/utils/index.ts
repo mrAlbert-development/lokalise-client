@@ -15,7 +15,7 @@ export function saveFile(dir: string, fileName: string, content: string) {
 }
 
 export function removeDirectory(dir: string) {
-  fs.rmdirSync(dir, { recursive: true });
+  fs.rmSync(dir, { recursive: true });
 }
 
 export function logMessage(message: string, level: 'success' | 'warning' | 'error') {

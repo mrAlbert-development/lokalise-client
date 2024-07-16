@@ -17,7 +17,7 @@ function saveFile(dir, fileName, content) {
 }
 exports.saveFile = saveFile;
 function removeDirectory(dir) {
-    fs_1.default.rmdirSync(dir, { recursive: true });
+    fs_1.default.rmSync(dir, { recursive: true });
 }
 exports.removeDirectory = removeDirectory;
 function logMessage(message, level) {
