@@ -20,6 +20,19 @@ program
     }
   });
 
+program
+  .command('push-dato')
+  .description('Push translations to DatoCMS')
+  .action((env, options) => {
+    try {
+      const configuration = config.get('translations');
+      const client = new LokaliseClient(configuration);
+      client.pushTranslationsToDatoCMS();
+    } catch (error) {
+      logError(error.message);
+    }
+  });
+
 program.parse(process.argv);
 
 function logError(error) {
