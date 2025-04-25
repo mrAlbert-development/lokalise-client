@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchLocales = void 0;
+exports.fetchLocales = fetchLocales;
 var tslib_1 = require("tslib");
 var decompress_1 = tslib_1.__importDefault(require("decompress"));
 var https_1 = tslib_1.__importDefault(require("https"));
@@ -17,7 +17,7 @@ function fetchLocales(url) {
                     return [4 /*yield*/, mapZipFileToBuffer(response)];
                 case 2:
                     buffer = _a.sent();
-                    return [4 /*yield*/, decompress_1.default(buffer)];
+                    return [4 /*yield*/, (0, decompress_1.default)(buffer)];
                 case 3:
                     files = _a.sent();
                     return [2 /*return*/, files.reduce(function (acc, file) {
@@ -31,7 +31,6 @@ function fetchLocales(url) {
         });
     });
 }
-exports.fetchLocales = fetchLocales;
 function getZipFile(url) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
         return tslib_1.__generator(this, function (_a) {
@@ -65,8 +64,8 @@ function mapFileToLocale(file) {
         return new locale_1.Locale(file.path, JSON.parse(file.data.toString('utf8')));
     }
     catch (error) {
-        utils_1.logMessage(file.path, 'error');
-        utils_1.logMessage(error, 'error');
+        (0, utils_1.logMessage)(file.path, 'error');
+        (0, utils_1.logMessage)(error, 'error');
     }
 }
 //# sourceMappingURL=files.js.map

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Locale = void 0;
 var tslib_1 = require("tslib");
-var flat_1 = tslib_1.__importDefault(require("flat"));
+var flat_1 = require("flat");
 var deepmerge_1 = tslib_1.__importDefault(require("deepmerge"));
 var json_to_ts_1 = tslib_1.__importDefault(require("json-to-ts"));
 var Locale = /** @class */ (function () {
@@ -14,7 +14,7 @@ var Locale = /** @class */ (function () {
     Locale.prototype.getTranslations = function (useFlat) {
         if (useFlat === void 0) { useFlat = false; }
         if (useFlat) {
-            return flat_1.default(this._translations, {
+            return (0, flat_1.flatten)(this._translations, {
                 delimiter: this.delimiter,
             });
         }
@@ -24,18 +24,18 @@ var Locale = /** @class */ (function () {
         var _this = this;
         var newTranslations = {};
         Object.keys(this._translations).forEach(function (key) {
-            newTranslations["" + prefix + key] = _this._translations[key];
+            newTranslations["".concat(prefix).concat(key)] = _this._translations[key];
         });
         this._translations = newTranslations;
         return this._translations;
     };
     Locale.prototype.addTranslations = function (newTranslations) {
-        this._translations = deepmerge_1.default(this._translations, newTranslations);
+        this._translations = (0, deepmerge_1.default)(this._translations, newTranslations);
         return this._translations;
     };
     Locale.prototype.getTypes = function () {
         var result = '';
-        var types = json_to_ts_1.default(this._translations).map(function (t) { return "export " + t + "\n\n"; });
+        var types = (0, json_to_ts_1.default)(this._translations).map(function (t) { return "export ".concat(t, "\n\n"); });
         result += types.join('');
         return result;
     };

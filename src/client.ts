@@ -8,7 +8,6 @@ interface Config {
   dist: string;
   projects: ReadonlyArray<ProjectConfig>;
   token: string;
-
   clean?: boolean;
   declaration?: DeclarationConfig;
   delimiter?: string;
@@ -95,7 +94,7 @@ export class LokaliseClient {
     const response: {
       bundle_url: string;
       project_id: string;
-    } = await this.api.files.download(id, {
+    } = await this.api.files().download(id, {
       bundle_structure: '%LANG_ISO%',
       export_empty_as: 'empty',
       format: 'json',

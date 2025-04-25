@@ -1,4 +1,4 @@
-import flatten from 'flat';
+import { flatten } from 'flat';
 import merge from 'deepmerge';
 import JsonToTS from 'json-to-ts';
 

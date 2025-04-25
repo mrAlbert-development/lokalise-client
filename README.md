@@ -48,7 +48,7 @@ You can define several projects. Also you can extend project params by [official
 
 In your `package.json` file add command `"fetch-translations": "translations fetch"`.
 
-Run command `npm run fetch-translations`.
+Run command `yarn fetch-translations`.
 
 ## Additional options
 
