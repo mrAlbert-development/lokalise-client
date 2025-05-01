@@ -32,24 +32,24 @@ var LokaliseClient = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         error_1 = _b.sent();
-                        utils_1.logMessage('Fetching translations was failed', 'error');
+                        (0, utils_1.logMessage)('Fetching translations was failed', 'error');
                         console.error(error_1);
                         return [2 /*return*/];
                     case 4:
                         if (this.locales.length === 0) {
-                            utils_1.logMessage('Translations are empty', 'error');
+                            (0, utils_1.logMessage)('Translations are empty', 'error');
                             return [2 /*return*/];
                         }
                         if (clean) {
-                            utils_1.removeDirectory(dist);
+                            (0, utils_1.removeDirectory)(dist);
                         }
                         this.locales.forEach(function (locale) {
-                            utils_1.saveJsonToFile(dist + "/" + locale.language, (prefix || '') + "index.json", locale.getTranslations(useFlat));
-                            utils_1.logMessage("Translations were saved " + locale.language + ". Translations count: " + locale.getTranslationsCount(), 'success');
+                            (0, utils_1.saveJsonToFile)("".concat(dist, "/").concat(locale.language), "".concat(prefix || '', "index.json"), locale.getTranslations(useFlat));
+                            (0, utils_1.logMessage)("Translations were saved ".concat(locale.language, ". Translations count: ").concat(locale.getTranslationsCount()), 'success');
                         });
                         if (declaration) {
-                            utils_1.saveFile(declaration.dist + "/types", 'index.ts', this.locales[0].getTypes());
-                            utils_1.logMessage("Declaration file was saved", 'success');
+                            (0, utils_1.saveFile)("".concat(declaration.dist, "/types"), 'index.ts', this.locales[0].getTypes());
+                            (0, utils_1.logMessage)("Declaration file was saved", 'success');
                         }
                         return [2 /*return*/];
                 }
@@ -57,29 +57,29 @@ var LokaliseClient = /** @class */ (function () {
         });
     };
     LokaliseClient.prototype.fetchProject = function (_a) {
-        var prefix = _a.prefix, id = _a.id, shared = tslib_1.__rest(_a, ["prefix", "id"]);
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var delimiter, response, locales, hasAlreadyFetchedProject, existedLanguages_1;
             var _this = this;
+            var prefix = _a.prefix, id = _a.id, shared = tslib_1.__rest(_a, ["prefix", "id"]);
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         delimiter = this.config.delimiter;
-                        return [4 /*yield*/, this.api.files.download(id, tslib_1.__assign({ bundle_structure: '%LANG_ISO%', export_empty_as: 'empty', format: 'json', indentation: '2sp', original_filenames: false, placeholder_format: 'i18n', plural_format: 'i18next', replace_breaks: false }, shared))];
+                        return [4 /*yield*/, this.api.files().download(id, tslib_1.__assign({ bundle_structure: '%LANG_ISO%', export_empty_as: 'empty', format: 'json', indentation: '2sp', original_filenames: false, placeholder_format: 'i18n', plural_format: 'i18next', replace_breaks: false }, shared))];
                     case 1:
                         response = _b.sent();
-                        return [4 /*yield*/, files_1.fetchLocales(response.bundle_url)];
+                        return [4 /*yield*/, (0, files_1.fetchLocales)(response.bundle_url)];
                     case 2:
                         locales = _b.sent();
                         hasAlreadyFetchedProject = this.locales.length > 0;
                         if (hasAlreadyFetchedProject) {
                             existedLanguages_1 = this.locales.map(function (locale) { return locale.language; });
                             if (existedLanguages_1.length !== locales.length) {
-                                utils_1.logMessage("Projects have different languages", 'warning');
+                                (0, utils_1.logMessage)("Projects have different languages", 'warning');
                             }
                             locales.forEach(function (locale) {
                                 if (!existedLanguages_1.includes(locale.language)) {
-                                    utils_1.logMessage("Projects have different languages " + locale.language, 'warning');
+                                    (0, utils_1.logMessage)("Projects have different languages ".concat(locale.language), 'warning');
                                 }
                             });
                         }
