@@ -65,7 +65,7 @@ var LokaliseClient = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         delimiter = this.config.delimiter;
-                        return [4 /*yield*/, this.api.files().download(id, tslib_1.__assign({ bundle_structure: '%LANG_ISO%', export_empty_as: 'empty', format: 'json', indentation: '2sp', original_filenames: false, placeholder_format: 'i18n', plural_format: 'i18next', replace_breaks: false }, shared))];
+                        return [4 /*yield*/, this.api.files().download(id, tslib_1.__assign({ bundle_structure: '%LANG_ISO%', export_empty_as: 'empty', format: 'json', indentation: '2sp', original_filenames: false, placeholder_format: 'i18n', plural_format: 'i18next_v4', replace_breaks: false }, shared))];
                     case 1:
                         response = _b.sent();
                         return [4 /*yield*/, (0, files_1.fetchLocales)(response.bundle_url)];

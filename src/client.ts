@@ -101,7 +101,7 @@ export class LokaliseClient {
       indentation: '2sp',
       original_filenames: false,
       placeholder_format: 'i18n',
-      plural_format: 'i18next',
+      plural_format: 'i18next_v4',
       replace_breaks: false,
       ...shared,
     });
